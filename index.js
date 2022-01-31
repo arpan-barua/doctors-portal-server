@@ -62,8 +62,9 @@ client.connect(err => {
         const file = req.files.file;
         const name = req.body.name;
         const email = req.body.email;
+        const phone = req.body.phone;
         const filePath = `${__dirname}/doctors/${file.name}`;
-        console.log(file,name,email)
+        console.log(file,name,email,phone)
         file.mv(filePath, err=>{
             if(err){
                 console.log(err);
@@ -78,7 +79,7 @@ client.connect(err => {
                 img: Buffer(encImg, 'base64')
             };
 
-            doctorCollection.insertOne({name, email, image})
+            doctorCollection.insertOne({name, email, phone, image})
             .then(result => {
                 fs.remove(filePath, error =>{
                     if(error){
